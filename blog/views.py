@@ -22,6 +22,7 @@ def blogs(request):
 
 def blog_detail(request, slug):
   blog = Blog.objects.get(slug = slug)
+  
   return render(request, "blog/blog-detail.html", {
     "blog": blog
   })
@@ -39,8 +40,6 @@ def create_blog(request):
     is_home = request.POST.get("is_home")
     blogger = request.user.username
     image = request.FILES.get("fileImage")
-
-    print(image)
 
     if categoryID != "all":
       category = Category.objects.get(id=categoryID)
@@ -87,3 +86,16 @@ def filter_category(request, slug):
     "category_length": category_length,
   }
   return render(request, "blog/blogs.html", context)
+
+def get_user_blogs(request, username):
+  blogs = Blog.objects.filter(blogger = username)
+
+  if len(blogs) == 0:
+    return redirect('blogs')
+
+  context = {
+    'blogs': blogs,
+    'username': username,
+  }
+
+  return render(request, 'blog/user-blogs.html', context)
