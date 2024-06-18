@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock  %}
+
+{% block content %}
+<div class="container">
+  <div class="row text-center mt-4 mb-4">
+   <h1 class="display-1">Profile</h1>
+  </div>
+  <div class="row">
+    <div class="col-8 ms-auto me-auto">
+      <form method="POST">
+
+       {% if  error %}
+       <div class="alert alert-danger">
+        {{error}}
+       </div>
+       {% endif %}
+
+       {% if  success %}
+       <div class="alert alert-success">
+        {{success}}
+       </div>
+       {% endif %}
+
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="text" name="email" value="{{email}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="id-username" class="form-label">Username</label>
+          <input type="text" name="username" value="{{username}}" disabled class="form-control opacity-50" id="id-username">
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="id-firstname" class="form-label">First Name</label>
+              <input type="text" name="first_name" value="{{first_name}}" class="form-control" id="id-firstname">
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="id-lastname" class="form-label">Last Name</label>
+              <input type="text" name="last_name" value="{{last_name}}" class="form-control" id="id-lastname">
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <a href={% url 'profile' %} type="button" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock  %}

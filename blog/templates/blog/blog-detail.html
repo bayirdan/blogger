@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Blog Detail: {{blog.id}}
+{% endblock  %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="img-box row">
+         <div class="col-10 mx-auto py-4">
+          <img src="{{blog.imageFile.url}}" class="card-img-top img-fluid object-fit-cover" style="max-height: 400px; box-shadow: 0 2px 4px rgba(0,0,0,0.25); border-radius: 5px" alt="...">
+         </div>
+        </div>
+        
+        <div class="px-4 py-2 text-body-secondary d-flex flex-column align-items-end border-bottom">
+          <div class="date">
+            {{blog.created_at}}
+          </div>
+          <div class="blogger-name mt-4">
+            {{blog.blogger}}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h6 class="card-title h6 text-uppercase fw-bold text-secondary py-5 px-2 bg-light"> {{blog.title}} </h6>
+          <p class="card-text"> {{blog.description|safe}} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock  %}

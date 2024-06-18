@@ -1,0 +1,20 @@
+<ul class="list-group">
+  {% for category in categories %}
+    {% if category.slug == selected_category %}
+      <a href={% url "filter-category" category.slug %} class="text-decoration-none">
+        <li class="list-group-item d-flex justify-content-between align-items-center active bg-secondary border-0">
+          {{category.name}}
+          <span class="badge text-bg-dark rounded-pill">
+            {{category_length}}
+          </span>
+        </li>
+      </a>
+    {% else %}
+    <a href={% url "filter-category" category.slug %} class="text-decoration-none">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{category.name}}
+      </li>
+    </a>
+    {% endif %}
+  {% endfor %}
+</ul>

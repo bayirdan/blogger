@@ -1,0 +1,22 @@
+#blog-navbar .profile-menu {
+  width: 300px;
+  top: 88px;
+  right: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+  z-index: 999;
+}
+
+.open-menu {
+  max-height: 200px !important;
+}
+
+@keyframes menu {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 200px;
+  }
+}

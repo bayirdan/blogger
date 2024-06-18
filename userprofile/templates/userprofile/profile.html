@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Profile
+{% endblock  %}
+
+{% block css_files %}
+  <link rel="stylesheet" href={% static "userprofile/css/style.css" %}>
+{% endblock  %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="row p-5 border border-light border-3 rounded shadow-sm">
+      <div class="col-12">
+        <h1 class="display-5 text-center">{{username}}</h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item pt-4 bg-light mb-3 rounded border-0">
+            <div class="lead">
+              <strong class="text-bold profile-list-item fw-bold">Full Name: </strong> {{fullname}}
+            </div>
+          </li>
+
+          <li class="list-group-item pt-4 bg-light mb-3 rounded border-0">
+            <div class="lead">
+              <strong class="text-bold profile-list-item fw-bold">Email: </strong> {{email}}
+            </div>
+          </li>
+
+          <li class="list-group-item pt-4 bg-light mb-3 rounded border-0">
+            <div class="lead">
+              <strong class="text-bold profile-list-item fw-bold">Registration: </strong> {{date_joined|date:"d M Y"}}
+            </div>
+          </li>
+
+          <li class="list-group-item pt-4 bg-light mb-3 rounded border-0">
+            <div class="lead">
+              <strong class="text-bold profile-list-item fw-bold">Last Login: </strong> {{last_login|date:"d M Y"}}
+            </div>
+          </li>
+
+          <li class="list-group-item pt-4 bg-light mb-3 rounded border-0">
+            <div class="lead">
+              <strong class="text-bold profile-list-item fw-bold">Blogs Created: </strong> {{blogs|length}}
+            </div>
+          </li>
+
+          <li class="list-group-item pt-4 text-center">
+            <a href={% url 'edit_profile' %} class="btn btn-primary w-50 py-3">Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock  %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Create Blog
+{% endblock  %}
+
+{% block content %}
+<div class="row mt-4 mb-4">
+  <h1 class="display-1 mb-4 text-center">Create Blog</h1>
+
+  <div class="row">
+    <div class="col-8 ms-auto me-auto">
+      <form method="POST" enctype="multipart/form-data">
+
+       {% if  error %}
+       <div class="alert alert-danger">
+        {{error}}
+       </div>
+       {% endif %}
+
+        {% csrf_token %}
+        <div class="mb-4 mt-4 text-center">
+          <label for="blogText" class="form-label mt-4">
+            <h1 class="display-6">Blog</h1> 
+            {% if blog_text_error %}
+              <span class="text-danger fs-6">
+               ( {{blog_text_error}} )
+              </span>
+            {% endif %}
+          </label>
+          <textarea type="text" name="blogText" class="form-control" id="blogText">{{blogText}}</textarea>
+        </div>
+
+        <div class="mb-4">
+          <input class="form-control form-control" id="fileImage" type="file" accept="image/*" name="fileImage">
+        </div>
+
+        <div class="mb-4">
+          <div class="input-group mb-3 flex-nowrap">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Category</label>
+            </div>
+            <select class="form-select w-100" id="inputGroupSelect01" name="category">
+              <option value="all" selected>All</option>
+              {% for category in categories %}
+                <option value={{category.id}}>{{category.name|capfirst}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="blogTitle" class="form-label d-block">
+            Blog Title
+          </label>
+          <input value="{{title}}" type="text" name="title" class="form-control {% if title_error %}is-invalid{% endif %}" id="blogTitle" aria-describedby="title">
+          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Title is required.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="row">
+            <div class="col-12 mb-4">
+              <input name="is_active" class="form-check-input" type="checkbox" value="True" id="flexCheckChecked1" checked>
+              <label class="form-check-label ms-2" for="flexCheckChecked1">
+                Is Active?
+              </label>
+            </div>
+            <div class="col-12">
+              <input name="is_home" class="form-check-input" type="checkbox" value="True" id="flexCheckChecked" checked>
+              <label class="form-check-label ms-2" for="flexCheckChecked2">
+                Is Home Page?
+            </label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+ </div>
+{% endblock  %}

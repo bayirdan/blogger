@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Blogs
+{% endblock  %}
+
+{% block css_files %}
+  <link rel="stylesheet" href={% static "blog/css/style.css" %} />
+{% endblock  %}
+
+{% block content %}
+ <div class="container-fluid">
+  <div class="row mt-4">
+    <h1 class="display-1 text-center mt-4 mb-4">Blogs</h1>
+
+    <div class="col-3">
+      {% include "blog/partials/_sidebar-category.html" %}
+    </div>
+
+    <div class="col-9">
+      <div class="row">
+        {% for blog in blogs %}
+          {% include "blog/partials/_blog.html" %}
+          {% empty %}
+          <div class="h3 text-danger ms-4 text-decoration-underline">
+            No Blog!
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+ </div>
+{% endblock  %}

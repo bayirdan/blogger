@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Login
+{% endblock  %}
+
+{% block content %}
+<div class="container">
+  <div class="row text-center mt-4 mb-4">
+   <h1 class="display-1">Login Page</h1>
+  </div>
+  <div class="row">
+    <div class="col-8 ms-auto me-auto">
+      <form method="POST">
+
+       {% if  error %}
+       <div class="alert alert-danger">
+        {{error}}
+       </div>
+       {% endif %}
+
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock  %}
