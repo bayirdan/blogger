@@ -14,9 +14,22 @@ def index(request):
 def blogs(request):
   blogs = Blog.objects.filter(isActive=True)
   categories = Category.objects.all()
+
+  categories_list = []
+
+  for category in categories:
+    blogs_by_category = Blog.objects.filter(category = category.id)
+    category_length = len(blogs_by_category)
+    categories_list.append({
+      'name': category.name,
+      'length': category_length,
+      'slug': category.slug
+    })
+
   context = {
     "blogs": blogs,
-    "categories": categories
+    "categories": categories,
+    "categories_list": categories_list,
   }
   return render(request, "blog/blogs.html", context)
 
@@ -77,13 +90,25 @@ def create_blog(request):
 
 def filter_category(request, slug):
   blogs = Blog.objects.filter(category__slug = slug)
-  category_length = len(blogs)
   categories = Category.objects.all()
+
+  categories_list = []
+
+  for category in categories:
+    blogs_by_category = Blog.objects.filter(category = category.id)
+    category_length = len(blogs_by_category)
+    categories_list.append({
+      'name': category.name,
+      'length': category_length,
+      'slug': category.slug
+    })
+
+    
   context = {
     "blogs": blogs,
     "categories": categories,
     "selected_category": slug,
-    "category_length": category_length,
+    "categories_list": categories_list
   }
   return render(request, "blog/blogs.html", context)
 
