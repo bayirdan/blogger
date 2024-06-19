@@ -10,7 +10,7 @@ urlpatterns = [
     path("blogs", views.blogs, name="blogs"),
     path("blogs/create", views.create_blog, name="create-blog" ),
     path("blogs/<slug:slug>", views.blog_detail, name="blog-detail"),
-    path("blogs/user/<str:username>", views.get_user_blogs, name="get-user-blogs"),
+    path("blogs/user/<str:username>", views.get_user_blogs, name="user_blogs"),
     path("category/<slug:slug>", views.filter_category, name="filter-category")
 ]
 

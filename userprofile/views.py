@@ -7,7 +7,7 @@ from blog.models import Blog
 
 def get_profile(request):
   if not request.user.is_authenticated:
-    return redirect('register')
+    return redirect('login')
 
   user_data = request.user
 
@@ -26,7 +26,7 @@ def get_profile(request):
 
 def edit_profile(request):
   if not request.user.is_authenticated:
-    return redirect("register")
+    return redirect("login")
   else:
     context = {
       'username': request.user.username,
@@ -80,3 +80,29 @@ def edit_profile(request):
           'last_name': request.user.last_name
         })
     return render(request, "userprofile/editprofile.html", context)
+  
+def change_password(request):
+  if not request.user.is_authenticated:
+    return redirect("login")
+  
+  if request.method == 'POST':
+    current_password = request.POST.get('current_password')
+    new_password = request.POST.get('new_password')
+    confirm_password = request.POST.get('confirm_password')
+
+    if current_password == '' or new_password == '' or confirm_password == '':
+      return render(request, 'userprofile/change-password.html', {'error': "Lütfen tüm inputları eksiksiz giriniz!"})
+    
+    if not request.user.check_password(current_password):
+      return render(request, 'userprofile/change-password.html', {'error': "Parola hatalı!"})
+    
+    if new_password != confirm_password:
+      return render(request, 'userprofile/change-password.html', {'error': "Şifreler eşleşmiyor!"})
+    
+    request.user.set_password(new_password)
+    request.user.save()
+
+    return render(request, 'userprofile/change-password.html', {'success': "Parola değiştirme başarıyla gerçekleştirildi!"})
+  
+  return render(request, 'userprofile/change-password.html')
+
