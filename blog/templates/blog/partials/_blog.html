@@ -20,7 +20,7 @@
       </div>
     </div>
     {% if user.username == username %}
-        <a href="#" class="btn btn-success">
+        <a href="{% url 'edit-blog' blog.slug %}" class="btn btn-success">
           Edit Blog
         </a>
     {% endif %}

@@ -11,3 +11,5 @@
 ## Userprofile hata veriyor, onu çöz
 
 ## navbar.html'de url'e girdiğimde username parametresini gönderiyorum ama hata veriyor, ona tekrar bak, url'i parametre ile göndermeyi araştır. Orda hata aldık
+
+## Blog edit sayfası hazır, veriler geliyor ama post etme kısmına geçmedik daha, sadece verilerin gelmesi kısmını yaptın, ordan devam et!!!
