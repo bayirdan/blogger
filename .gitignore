@@ -1,0 +1,18 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+
+# Virtual Environment
+venv/
+env/
+
+# Ortam dosyaları
+.env
+
+# Diğer
+*.DS_Store
+*.swp
+*.sublime-project
+*.sublime-workspace
