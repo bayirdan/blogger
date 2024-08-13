@@ -12,7 +12,11 @@
       <div class="card">
         <div class="img-box row">
          <div class="col-10 mx-auto py-4">
-          <img src="{{blog.imageFile.url}}" class="card-img-top img-fluid object-fit-cover" style="max-height: 400px; box-shadow: 0 2px 4px rgba(0,0,0,0.25); border-radius: 5px" alt="...">
+          {% if blog.imageFile %}
+            <img src="{{blog.imageFile.url}}" class="img-fluid rounded-start custom-image" alt="...">
+          {% else %}
+            <img src="{% static 'images/no-image.png' %}" class="card-img-bottom img-fluid object-fit-contain" style="max-height: 400px; box-shadow: 0 2px 4px rgba(0,0,0,0.25); border-radius: 5px" alt="...">
+          {% endif %}
          </div>
         </div>
         

@@ -15,9 +15,15 @@
     <h1 class="display-1 text-center mt-4 mb-4">Home Page</h1>
 
     <div class="col-12">
-      {% for blog in blogs %}
+      {% if blogs|length < 1 %}
+        <div class="h3 text-danger ms-4 text-decoration-underline">
+          No Blog!
+        </div>
+      {% else %}
+        {% for blog in blogs %}
           {% include "blog/partials/_blog.html" %}
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
  </div>

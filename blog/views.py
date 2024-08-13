@@ -82,10 +82,15 @@ def create_blog(request):
         "blog_text_error": "Blog Text is required",
         "categories": categories
       })
-    
-    blog = Blog.objects.create(title=title, category=category, isHome=is_home, isActive=is_active, description=blogText, blogger=blogger, imageFile=image)
+
+    blog = Blog.objects.create(title=title, category=category, isHome=is_home, isActive=is_active, description=blogText, blogger=blogger)
+
+    if image != None:
+      blog.imageFile = image
+
     blog.save()
     return redirect("home")
+  
   return render(request, "blog/create-blog.html", {"categories": categories})
 
 def edit_blog(request, slug):
@@ -126,6 +131,9 @@ def edit_blog(request, slug):
         "title_error": "Title is required",
         "categories": categories,
         "category": category,
+        "is_active": is_active,
+        "is_home": is_home,
+        "blogger": blog.blogger,
       })
     
     if not blogText:
@@ -134,7 +142,10 @@ def edit_blog(request, slug):
         "title": title,
         "blog_text_error": "Blog Text is required",
         "categories": categories,
-        "category": category
+        "category": category,
+        "is_active": is_active,
+        "is_home": is_home,
+        "blogger": blog.blogger,
       })
 
     if image != None:
@@ -161,11 +172,21 @@ def edit_blog(request, slug):
     "is_home": blog.isHome,
     "blogger": blog.blogger,
     "image": blog.imageFile,
+    "slug": blog.slug
   }
 
   return render(request, 'blog/edit-blog.html', context)
 
+def delete_blog(request, slug):
+  if request.user.is_authenticated == None:
+    return redirect("blogs")
   
+  blog = Blog.objects.get(slug = slug)
+
+  if request.user.username == blog.blogger:
+    blog.delete()
+
+  return redirect("blogs")
 
 def filter_category(request, slug):
   blogs = Blog.objects.filter(category__slug = slug)
