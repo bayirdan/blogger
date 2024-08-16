@@ -149,9 +149,7 @@ def edit_blog(request, slug):
       })
 
     if image != None:
-      blog.image = image
-
-    print(image)
+      blog.imageFile = image
 
     blog.title = title
     blog.description = blogText
