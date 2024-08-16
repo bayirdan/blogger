@@ -15,6 +15,14 @@ def blogs(request):
   blogs = Blog.objects.filter(isActive=True)
   categories = Category.objects.all()
 
+  search_query = ''
+
+  if request.method == "POST":
+    search_query = request.POST['search']
+    if search_query == '':
+      return redirect('blogs')
+    return redirect('search-blogs', search_query)
+
   categories_list = []
 
   for category in categories:
@@ -30,6 +38,7 @@ def blogs(request):
     "blogs": blogs,
     "categories": categories,
     "categories_list": categories_list,
+    "search_query": search_query,
   }
   return render(request, "blog/blogs.html", context)
 
@@ -222,3 +231,37 @@ def get_user_blogs(request, username):
   }
 
   return render(request, 'blog/user-blogs.html', context)
+
+
+def get_search_blogs(request, search_data):
+  search_query = search_data
+
+  if request.method == "POST":
+    search_query = request.POST['search']
+    if search_query == '':
+      return redirect('blogs')
+    return redirect('search-blogs', search_query)
+  
+  search_query = search_query.lower()
+  blogs = Blog.objects.filter(title__icontains=search_query, isActive=True)
+  categories = Category.objects.all()
+
+
+  categories_list = []
+
+  for category in categories:
+    blogs_by_category = Blog.objects.filter(category = category.id)
+    category_length = len(blogs_by_category)
+    categories_list.append({
+      'name': category.name,
+      'length': category_length,
+      'slug': category.slug
+    })
+
+  context = {
+    "blogs": blogs,
+    "categories": categories,
+    "categories_list": categories_list,
+    "search_query": search_query,
+  }
+  return render(request, "blog/blogs.html", context)
