@@ -1,0 +1,5 @@
+- Search Bar
+- Edit blog preview in blogs list
+- Tags
+- Commit
+- Footer

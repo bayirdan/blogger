@@ -13,6 +13,7 @@ urlpatterns = [
     path("blogs/<slug:slug>/edit", views.edit_blog, name="edit-blog"),
     path("blogs/<slug:slug>/delete", views.delete_blog, name="delete-blog"),
     path("blogs/user/<str:username>", views.get_user_blogs, name="user_blogs"),
+    path("blogs/search/<str:search_data>", views.get_search_blogs, name="search-blogs"),
     path("category/<slug:slug>", views.filter_category, name="filter-category")
 ]
 

@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-12 ms-auto me-auto">
+    <form method="POST">
+
+      {% csrf_token %}
+      <div class="searchbar d-flex align-items-center mb-5">
+          <input type="text" name="search" class="form-control" id="searchId" aria-describedby="searchHelp" value={{search_query}}>
+          <button type="submit" class="btn btn-primary ms-1">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
